@@ -13,6 +13,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.time.LocalDateTime;
 
@@ -24,15 +25,15 @@ import java.time.LocalDateTime;
 @EntityListeners({AuditingEntityListener.class})
 public class BaseEntity {
     @CreatedDate
-    @Column(columnDefinition = "timestamp with time zone", nullable = false, updatable = false)
+    @Column(columnDefinition = "timestamp with time zone", updatable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @Column(columnDefinition = "timestamp with time zone", nullable = false)
+    @Column(columnDefinition = "timestamp with time zone")
     private LocalDateTime modifiedDate;
 
     @CreatedBy
-    @Column(nullable = false, updatable = false)
+    @Column(updatable = false)
     private String createdBy;
 
     @LastModifiedBy
