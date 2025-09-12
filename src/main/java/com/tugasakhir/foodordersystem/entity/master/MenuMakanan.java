@@ -3,7 +3,6 @@ package com.tugasakhir.foodordersystem.entity.master;
 import com.tugasakhir.foodordersystem.entity.app.BaseEntity;
 import com.tugasakhir.foodordersystem.model.enums.StatusMakanan;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 

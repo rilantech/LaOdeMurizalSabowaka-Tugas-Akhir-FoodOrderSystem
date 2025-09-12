@@ -3,14 +3,14 @@ package com.tugasakhir.foodordersystem.model.enums;
 import lombok.Getter;
 
 @Getter
-public enum StatusMakanan {
+public enum StatusMasak {
 
-    LAKU("Laku"),
-    BELUM_LAKU("Belum Laku");
+    SEDANG_DIMASAK("Sedang Dimasak"),
+    SELESAI("Selesai");
 
     private final String label;
 
-    StatusMakanan(String label) {
+    StatusMasak(String label) {
         this.label = label;
     }
 

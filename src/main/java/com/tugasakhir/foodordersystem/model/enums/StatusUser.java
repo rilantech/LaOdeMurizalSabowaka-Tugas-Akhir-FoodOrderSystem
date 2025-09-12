@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum StatusUser {
-    AKTIF("AKTIF"),
-    TIDAK_AKTIF("TIDAK_AKTIF");
+    AKTIF("Aktif"),
+    TIDAK_AKTIF("Tidak Aktif");
 
     private final String label;
 
