@@ -1,7 +1,16 @@
 package com.tugasakhir.foodordersystem.model.enums;
 
-public enum TipeUpload {
+import lombok.Getter;
 
-    GAMBAR
+@Getter
+public enum TipeUpload {
+    PROFIL("Profil"),
+    MAKANAN("Makanan");
+
+    private final String label;
+
+    TipeUpload(String label) {
+        this.label = label;
+    }
 
 }

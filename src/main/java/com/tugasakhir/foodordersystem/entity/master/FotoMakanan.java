@@ -17,8 +17,8 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "m_foto_makanan", indexes = {
         @Index(name = "idx_foto_makanan_created_date", columnList = "createdDate"),
         @Index(name = "idx_foto_makanan_modified_date", columnList = "modifiedDate"),
-        @Index(name = "idx_foto_makanan_id_makanan", columnList = "id_makanan"),
-        @Index(name = "idx_foto_makanan_path_fotomakanan", columnList = "path_fotomakanan")
+        @Index(name = "idx_foto_makanan_id_menuMakanan", columnList = "id_menuMakanan"),
+        @Index(name = "idx_foto_makanan_path_fotoMakanan", columnList = "path_fotoMakanan")
 })
 public class FotoMakanan extends BaseEntity {
 
@@ -27,10 +27,10 @@ public class FotoMakanan extends BaseEntity {
     private String id_fotoMakanan;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_menu_makanan", nullable = false)
+    @JoinColumn(name = "id_menuMakanan", nullable = false)
     private MenuMakanan menuMakanan;
 
     @Column(nullable = false)
-    private String pathFotomakanan;
+    private String path_foto_makanan;
 
 }

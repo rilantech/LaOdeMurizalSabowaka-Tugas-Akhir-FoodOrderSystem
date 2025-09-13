@@ -1,6 +1,7 @@
 package com.tugasakhir.foodordersystem.entity.master;
 
 import com.tugasakhir.foodordersystem.entity.app.BaseEntity;
+import com.tugasakhir.foodordersystem.model.enums.KategoriMakanan;
 import com.tugasakhir.foodordersystem.model.enums.StatusMakanan;
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,21 +12,19 @@ import java.util.Set;
 
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
-@Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "m_menuMakanan", indexes = {
-        @Index(name = "idx_menuMakanan_created_date", columnList = "createdDate"),
-        @Index(name = "idx_menuMakanan_modified_date", columnList = "modifiedDate"),
-        @Index(name = "idx_menuMakanan_kategoriMakanan", columnList = "kategoriMakanan"),
-        @Index(name = "idx_menuMakanan_nama", columnList = "nama"),
-        @Index(name = "idx_menuMakanan_harga", columnList = "harga"),
-        @Index(name = "idx_menuMakanan_stok", columnList = "stok"),
-        @Index(name = "idx_menuMakanan_deskripsi", columnList = "deskripsi"),
-        @Index(name = "idx_menuMakanan_statusMakanan", columnList = "statusMakanan")
+@Table(name = "m_menu_makanan", indexes = {
+        @Index(name = "idx_menu_makanan_created_date", columnList = "createdDate"),
+        @Index(name = "idx_menu_makanan_modified_date", columnList = "modifiedDate"),
+        @Index(name = "idx_menu_makanan_kategori_makanan", columnList = "kategoriMakanan"),
+        @Index(name = "idx_menu_makanan_nama", columnList = "nama"),
+        @Index(name = "idx_menu_makanan_harga", columnList = "harga"),
+        @Index(name = "idx_menu_makanan_stok", columnList = "stok"),
+        @Index(name = "idx_menu_makanan_deskripsi", columnList = "deskripsi"),
+        @Index(name = "idx_menu_makanan_status_makanan", columnList = "statusMakanan")
 })
 public class MenuMakanan extends BaseEntity {
 
@@ -37,8 +36,9 @@ public class MenuMakanan extends BaseEntity {
     @Builder.Default
     private Set<FotoMakanan> listFoto = new HashSet<>();
 
-    @Column(nullable = false, unique = true)
-    private String kategoriMakanan;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private KategoriMakanan kategoriMakanan;
 
     @Column(nullable = false, unique = true)
     private String nama;
