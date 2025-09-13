@@ -9,7 +9,7 @@ public record UserRequestRecord(String idUser,
                                 String username,
                                 String password,
                                 String email,
-                                String nomorHP,
+                                String nomorHp,
                                 String alamat,
                                 StatusUser statusUser,
                                 Role role) {

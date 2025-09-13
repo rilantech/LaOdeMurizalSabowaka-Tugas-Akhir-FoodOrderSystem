@@ -1,6 +1,7 @@
 package com.tugasakhir.foodordersystem.entity.master;
 
 import com.tugasakhir.foodordersystem.entity.app.BaseEntity;
+import com.tugasakhir.foodordersystem.entity.order.Pesanan;
 import com.tugasakhir.foodordersystem.model.enums.KategoriMakanan;
 import com.tugasakhir.foodordersystem.model.enums.StatusMakanan;
 import jakarta.persistence.*;
@@ -8,6 +9,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -35,7 +37,9 @@ public class MenuMakanan extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "menuMakanan", orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
     private Set<FotoMakanan> listFoto = new HashSet<>();
-
+//
+//    @OneToMany(mappedBy = "menuMakanan", cascade = CascadeType.ALL)
+//    private Set<Pesanan> daftarPesanan = new HashSet<>();
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private KategoriMakanan kategoriMakanan;

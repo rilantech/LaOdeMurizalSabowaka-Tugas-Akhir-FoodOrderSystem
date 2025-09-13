@@ -3,7 +3,7 @@ package com.tugasakhir.foodordersystem.entity.order;
 import com.tugasakhir.foodordersystem.entity.app.BaseEntity;
 import com.tugasakhir.foodordersystem.entity.managementuser.User;
 import com.tugasakhir.foodordersystem.entity.master.MenuMakanan;
-import com.tugasakhir.foodordersystem.model.enums.StatusMakanan;
+import com.tugasakhir.foodordersystem.model.enums.MetodePembayaran;
 import com.tugasakhir.foodordersystem.model.enums.StatusPesanan;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,10 +21,10 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "m_pesanan", indexes = {
         @Index(name = "idx_pesanan_created_date", columnList = "createdDate"),
         @Index(name = "idx_pesanan_modified_date", columnList = "modifiedDate"),
-        @Index(name = "idx_pesanan_id_user", columnList = "id_user"),
-        @Index(name = "idx_pesanan_id_menu_makanan", columnList = "id_makanan"),
-        @Index(name = "idx_pesanan_jumlah", columnList = "id_jumlah"),
-        @Index(name = "idx_pesanan_metodePembayaran", columnList = "imetodePembayaran")
+        @Index(name = "idx_pesanan_id_user", columnList = "idUser"),
+        @Index(name = "idx_pesanan_id_menu_makanan", columnList = "id_menuMakanan"),
+        @Index(name = "idx_pesanan_jumlah", columnList = "jumlah"),
+        @Index(name = "idx_pesanan_metode_pembayaran", columnList = "metodePembayaran")
 })
 public class Pesanan extends BaseEntity {
 
@@ -33,11 +33,11 @@ public class Pesanan extends BaseEntity {
     private String idPesanan;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_menu_makanan", nullable = false)
+    @JoinColumn(name = "id_menuMakanan", nullable = false)
     private MenuMakanan menuMakanan;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user", nullable = false)
+    @JoinColumn(name = "idUser", nullable = false)
     private User user;
 
 
@@ -45,8 +45,11 @@ public class Pesanan extends BaseEntity {
     private Long jumlah;
 
     @Column(nullable = false)
-    private String metodePembayaran;
+    private Long totalHarga;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private MetodePembayaran metodePembayaran;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

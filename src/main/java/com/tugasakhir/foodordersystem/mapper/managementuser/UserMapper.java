@@ -16,7 +16,7 @@ public class UserMapper {
                 .username(request.username().toLowerCase())
                 .password(request.password())
                 .email(request.email().toLowerCase())
-                .nomorHp(request.nomorHP())
+                .nomorHp(request.nomorHp())
                 .alamat(request.alamat())
                 .statusUser(request.statusUser())
                 .role(request.role())

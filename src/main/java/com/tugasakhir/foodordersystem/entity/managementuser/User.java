@@ -1,6 +1,7 @@
 package com.tugasakhir.foodordersystem.entity.managementuser;
 
 import com.tugasakhir.foodordersystem.entity.app.BaseEntity;
+import com.tugasakhir.foodordersystem.entity.order.Pesanan;
 import com.tugasakhir.foodordersystem.model.enums.Role;
 import com.tugasakhir.foodordersystem.model.enums.StatusUser;
 import jakarta.persistence.*;
@@ -11,6 +12,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum StatusPesanan {
-    SELESAI("Selesai"),
-    BELUM_SELESAI("Belum Selesai");
+    DIPROSES("DiProses"),
+    SUDAH_DIPROSES("SudahDiProses");
 
     private final String label;
 
