@@ -6,6 +6,7 @@ import com.tugasakhir.foodordersystem.model.request.PesananRequestRecord;
 import com.tugasakhir.foodordersystem.model.response.BaseResponse;
 import com.tugasakhir.foodordersystem.service.order.PesananService;
 import com.tugasakhir.foodordersystem.service.order.RiwayatTransaksiPemesananService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("riwayat-transaksi-pemesanan")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Riwayat Pesanan Api")
 public class RiwayatTransaksiPemesananController {
 
         private final RiwayatTransaksiPemesananService riwayatTransaksiPemesananService;

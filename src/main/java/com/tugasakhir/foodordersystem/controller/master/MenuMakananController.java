@@ -6,6 +6,7 @@ import com.tugasakhir.foodordersystem.model.request.MenuMakananRequestRecord;
 import com.tugasakhir.foodordersystem.model.response.BaseResponse;
 import com.tugasakhir.foodordersystem.service.managementuser.UserService;
 import com.tugasakhir.foodordersystem.service.master.MenuMakananService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("menu-makanan")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Menu Makanan Api")
 public class MenuMakananController {
 
         private final MenuMakananService menuMakananService;

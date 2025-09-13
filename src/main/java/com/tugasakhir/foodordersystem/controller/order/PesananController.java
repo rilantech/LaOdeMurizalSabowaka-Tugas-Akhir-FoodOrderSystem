@@ -8,6 +8,7 @@ import com.tugasakhir.foodordersystem.model.request.UbahStatusPesananRequestReco
 import com.tugasakhir.foodordersystem.model.response.BaseResponse;
 import com.tugasakhir.foodordersystem.service.master.MenuMakananService;
 import com.tugasakhir.foodordersystem.service.order.PesananService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("pesanan")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Pesanan Api")
 public class PesananController {
 
         private final PesananService pesananService;

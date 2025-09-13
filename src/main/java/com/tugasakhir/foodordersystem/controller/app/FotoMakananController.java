@@ -3,6 +3,7 @@ package com.tugasakhir.foodordersystem.controller.app;
 import com.tugasakhir.foodordersystem.model.enums.TipeUpload;
 import com.tugasakhir.foodordersystem.model.response.BaseResponse;
 import com.tugasakhir.foodordersystem.service.app.FileService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import java.io.IOException;
 @RequestMapping("foto-makanan")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Foto Makanan Api")
 public class FotoMakananController {
 
     private final FileService fileService;
