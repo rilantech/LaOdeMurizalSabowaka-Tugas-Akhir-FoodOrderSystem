@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,13 +27,19 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void add(UserRequestRecord request) {
-
+        // validasi data existing
+        if (userRepository.existsByEmail(request.email().toLowerCase())) {
+            throw new RuntimeException("Email [" + request.email() + "] sudah digunakan");
+        }
+        if (userRepository.existsByUsername(request.username().toLowerCase())) {
+            throw new RuntimeException("Username [" + request.username() + "] sudah digunakan");
+        }
         var user = userMapper.requestToEntity(request);
-//        user.setPassword(passwordEncoder.encode(request.password()));
+        user.setPassword(passwordEncoder.encode(request.password()));
         userRepository.save(user);
     }
 
@@ -41,9 +48,16 @@ public class UserServiceImpl implements UserService {
 
         var userExisting = userRepository.findById(request.idUser()).orElseThrow(() ->  new RuntimeException("Data user tidak ditemukan"));
 
+        // validasi data existing
+        if (userRepository.existsByEmailAndIdUserNot(request.email().toLowerCase(), request.idUser())) {
+            throw new RuntimeException("Email [" + request.email() + "] sudah digunakan");
+        }
+        if (userRepository.existsByUsernameAndIdUserNot(request.username().toLowerCase(),  request.idUser())) {
+            throw new RuntimeException("Username [" + request.username() + "] sudah digunakan");
+        }
         var user = userMapper.requestToEntity(request);
         user.setIdUser(userExisting.getIdUser());
-//        user.setPassword(passwordEncoder.encode(request.password()));
+        user.setPassword(passwordEncoder.encode(request.password()));
         userRepository.save(user);
     }
 
