@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,29 +26,34 @@ public class PesananController {
 
         private final PesananService pesananService;
         @PostMapping("save")
+        @PreAuthorize("hasAnyRole('ADMIN', 'PELANGGAN')")
         public BaseResponse<?> save(@RequestBody PesananRequestRecord request) {
             pesananService.add(request);
             return BaseResponse.ok("Data berhasil disimpan", null);
         }
 
         @PutMapping("ubah-status-pesanan")
+        @PreAuthorize("hasAnyRole('ADMIN', 'PELANGGAN')")
         public BaseResponse<?> edit(@RequestBody PesananRequestRecord request) {
             pesananService.edit(request);
             return BaseResponse.ok("Data berhasil diubah", null);
         }
 
         @PostMapping("find-all")
+        @PreAuthorize("hasAnyRole('ADMIN', 'PELANGGAN')")
         public BaseResponse<?> findAll(@PageableDefault(direction = Sort.Direction.DESC, sort = "modifiedDate") Pageable pageable,
                                        @RequestBody PesananFilterRecord filterRequest) {
             return BaseResponse.ok(null, pesananService.findAll(filterRequest, pageable));
         }
 //
         @GetMapping("find-by-id/{id}")
+        @PreAuthorize("hasAnyRole('ADMIN', 'PELANGGAN')")
         public BaseResponse<?> findById(@PathVariable String id) {
             return BaseResponse.ok(null, pesananService.findById(id));
         }
 //
         @DeleteMapping("delete")
+        @PreAuthorize("hasAnyRole('ADMIN', 'PELANGGAN')")
         public BaseResponse<?> save(@RequestParam String idPesanan) {
             pesananService.delete(idPesanan);
             return BaseResponse.ok("Data pesanan berhasil dibatalkan", null);

@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,12 +26,14 @@ public class FotoProfilController {
     private final FileService fileService;
 
     @PostMapping(path = "upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PreAuthorize("hasAnyRole('ADMIN', 'PELANGGAN')")
     public BaseResponse<?> uploadFile(@RequestPart MultipartFile file,
                                       @RequestParam TipeUpload tipeUpload) {
         return fileService.upload(file, tipeUpload);
     }
 
     @GetMapping("view")
+    @PreAuthorize("hasAnyRole('ADMIN', 'PELANGGAN')")
     public void viewFile(@RequestParam String pathFile, HttpServletResponse response) throws IOException {
         Resource resource = fileService.loadFileAsResource(pathFile);
         IOUtils.copy(resource.getInputStream(), response.getOutputStream());

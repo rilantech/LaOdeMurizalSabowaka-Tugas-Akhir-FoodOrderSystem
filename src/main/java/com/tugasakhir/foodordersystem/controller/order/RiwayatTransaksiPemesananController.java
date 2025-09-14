@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,23 +30,27 @@ public class RiwayatTransaksiPemesananController {
         }
 
         @PutMapping("ubah-status-pesanan")
+        @PreAuthorize("hasRole('ADMIN')")
         public BaseResponse<?> edit(@RequestBody PesananRequestRecord request) {
             riwayatTransaksiPemesananService.edit(request);
             return BaseResponse.ok("Data berhasil diubah", null);
         }
 
         @PostMapping("find-all")
+        @PreAuthorize("hasAnyRole('ADMIN', 'PELANGGAN')")
         public BaseResponse<?> findAll(@PageableDefault(direction = Sort.Direction.DESC, sort = "modifiedDate") Pageable pageable,
                                        @RequestBody RiwayatTransaksiPemesananFilterRecord filterRequest) {
             return BaseResponse.ok(null, riwayatTransaksiPemesananService.findAll(filterRequest, pageable));
         }
 //
         @GetMapping("find-by-id/{id}")
+        @PreAuthorize("hasAnyRole('ADMIN', 'PELANGGAN')")
         public BaseResponse<?> findById(@PathVariable String id) {
             return BaseResponse.ok(null, riwayatTransaksiPemesananService.findById(id));
         }
 //
         @DeleteMapping("delete")
+        @PreAuthorize("hasRole('ADMIN')")
         public BaseResponse<?> save(@RequestParam String idTransaksi) {
             riwayatTransaksiPemesananService.delete(idTransaksi);
             return BaseResponse.ok("Data riwayat transaksi pemesanan berhasil dihapus", null);

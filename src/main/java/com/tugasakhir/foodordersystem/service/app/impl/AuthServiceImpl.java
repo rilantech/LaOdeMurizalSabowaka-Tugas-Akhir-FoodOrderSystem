@@ -1,8 +1,10 @@
 package com.tugasakhir.foodordersystem.service.app.impl;
 
 import com.tugasakhir.foodordersystem.entity.managementuser.User;
+import com.tugasakhir.foodordersystem.mapper.managementuser.UserMapper;
 import com.tugasakhir.foodordersystem.model.app.SimpleMap;
 import com.tugasakhir.foodordersystem.model.request.LoginRequestRecord;
+import com.tugasakhir.foodordersystem.model.request.UserRequestRecord;
 import com.tugasakhir.foodordersystem.repository.managementuser.UserRepository;
 import com.tugasakhir.foodordersystem.service.app.AuthService;
 import com.tugasakhir.foodordersystem.service.app.ValidatorService;
@@ -18,10 +20,24 @@ import java.time.LocalDateTime;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final ValidatorService validatorService;
 
+    @Override
+    public void registrasiAkun(UserRequestRecord request) {
+        // validasi data existing
+        if (userRepository.existsByEmail(request.email().toLowerCase())) {
+            throw new RuntimeException("Email [" + request.email() + "] sudah digunakan");
+        }
+        if (userRepository.existsByUsername(request.username().toLowerCase())) {
+            throw new RuntimeException("Username [" + request.username() + "] sudah digunakan");
+        }
+        var user = userMapper.requestToEntity(request);
+        user.setPassword(passwordEncoder.encode(request.password()));
+        userRepository.save(user);
+    }
     @Override
     public SimpleMap login(LoginRequestRecord request) {
         validatorService.validator(request);
