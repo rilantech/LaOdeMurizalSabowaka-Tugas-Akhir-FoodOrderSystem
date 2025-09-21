@@ -11,7 +11,7 @@ Food Order System adalah sistem yang memungkinkan pelanggan untuk melihat menu, 
 - Validation
 - Unit Test
 ## Teknologi Yang Digunakan
-- Backend : Java, Spring Boot
+- Backend : Java 21, Spring Boot, Maven 3.9.3
 - Database : PostgreSQL
 - Code Editor : Intellij
   
